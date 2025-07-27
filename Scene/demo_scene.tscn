@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://csp0843a2q22x"]
+
+[ext_resource type="PackedScene" uid="uid://duxxv3hn0kiga" path="res://Scene/player.tscn" id="1_5i4c7"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_knml5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5i4c7"]
+size = Vector2(40, 480)
+
+[node name="Demo Scene" type="Node2D"]
+
+[node name="Ground" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(583, 647)
+shape = SubResource("WorldBoundaryShape2D_knml5")
+
+[node name="ColorRect" type="ColorRect" parent="Ground"]
+offset_left = -31.0
+offset_top = 645.0
+offset_right = 1152.0
+offset_bottom = 650.0
+
+[node name="Player" parent="." instance=ExtResource("1_5i4c7")]
+position = Vector2(135, 579)
+
+[node name="Wall" type="StaticBody2D" parent="."]
+position = Vector2(938, 517)
+
+[node name="ColorRect" type="ColorRect" parent="Wall"]
+offset_top = -384.0
+offset_right = 40.0
+offset_bottom = 97.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(20, -144)
+shape = SubResource("RectangleShape2D_5i4c7")
+
+[node name="Wall2" type="StaticBody2D" parent="."]
+position = Vector2(751, 413)
+
+[node name="ColorRect" type="ColorRect" parent="Wall2"]
+offset_top = -384.0
+offset_right = 40.0
+offset_bottom = 97.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
+position = Vector2(20, -144)
+shape = SubResource("RectangleShape2D_5i4c7")
