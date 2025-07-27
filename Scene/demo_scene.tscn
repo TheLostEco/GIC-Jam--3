@@ -22,7 +22,6 @@ offset_right = 1152.0
 offset_bottom = 650.0
 
 [node name="Player" parent="." instance=ExtResource("1_5i4c7")]
-position = Vector2(135, 579)
 
 [node name="Wall" type="StaticBody2D" parent="."]
 position = Vector2(938, 517)
@@ -45,5 +44,31 @@ offset_right = 40.0
 offset_bottom = 97.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
+position = Vector2(20, -144)
+shape = SubResource("RectangleShape2D_5i4c7")
+
+[node name="Wall3" type="StaticBody2D" parent="."]
+position = Vector2(1035, 133)
+rotation = 1.57048
+
+[node name="ColorRect" type="ColorRect" parent="Wall3"]
+offset_top = -384.0
+offset_right = 40.0
+offset_bottom = 97.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3"]
+position = Vector2(20, -144)
+shape = SubResource("RectangleShape2D_5i4c7")
+
+[node name="Wall4" type="StaticBody2D" parent="."]
+position = Vector2(1744, 130)
+rotation = 1.57048
+
+[node name="ColorRect" type="ColorRect" parent="Wall4"]
+offset_top = -384.0
+offset_right = 40.0
+offset_bottom = 97.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall4"]
 position = Vector2(20, -144)
 shape = SubResource("RectangleShape2D_5i4c7")
