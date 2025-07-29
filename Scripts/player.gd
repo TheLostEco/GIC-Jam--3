@@ -31,9 +31,9 @@ func _ready() -> void:
 	horizontal_deceleration_rate = max_horizontal_speed / horizontal_deceleration_time if horizontal_deceleration_time > 0 else 99999.0
 
 	if !InputMap.has_action(jump_input_action):
-		push_warning("Jump input action '%s' not found in Project Settings -> Input Map. Please add it!" % jump_input_action)
+		push_warning( jump_input_action)
 	if !InputMap.has_action(dash_input_action):
-		push_warning("Dash input action '%s' not found in Project Settings -> Input Map. Please add it!" % dash_input_action)
+		push_warning( dash_input_action)
 
 func _input(event: InputEvent) -> void:
 	horizontal_input = Input.get_axis("move_left", "move_right")
