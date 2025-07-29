@@ -1,101 +1,99 @@
 extends CharacterBody2D
 
-@export var speed := 600
-@export var jump_force := -520
-@export var gravity := 1800
-@export var wall_jump_force := Vector2(400, -500)
-@export var max_fall_speed := 1000
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@export var max_horizontal_speed: float = 500.0
+@export var horizontal_acceleration_time: float = 0.15
+@export var horizontal_deceleration_time: float = 0.2
+@export var horizontal_stop_threshold: float = 0.5
 
-var facing_right := true
-var coyote_time := 0.1
-var coyote_timer := 0.0
-var jump_buffer_time := 0.1
-var jump_buffer_timer := 0.0
-var last_wall_normal := Vector2.ZERO
-var wall_jump_cooldown := 3.0
-var wall_jump_timer := 0.0
+@export var gravity_strength: float = 900.0
+@export var jump_velocity: float = -300.0
+@export var max_jumps: int = 2
+@export var jump_input_action: String = "jump"
 
-#Slide-related
-var is_sliding := false
-var slide_timer := 0.0
-var slide_duration := 0.5
-var slide_speed := 800
-var slide_cooldown := 0.5
-var slide_cooldown_timer := 0.0
+@export var dash_speed: float = 900.0
+@export var dash_duration: float = 0.25
+@export var dash_cooldown: float = 0.5
+@export var dash_input_action: String = "dash"
 
-func _physics_process(delta):
-	var direction = Input.get_action_strength("right") - Input.get_action_strength("left")
+var horizontal_acceleration_rate: float
+var horizontal_deceleration_rate: float
 
-	if Input.is_action_just_pressed("slide") and is_on_floor() and abs(velocity.x) > 100 and slide_cooldown_timer <= 0:
-		is_sliding = true
-		slide_timer = slide_duration
-		slide_cooldown_timer = slide_cooldown
-		velocity.x = (1 if facing_right else -1) * slide_speed
-		animation_player.play("slide")
+var horizontal_input: float = 0.0
+var jump_count: int = 0
 
-	if is_sliding:
-		slide_timer -= delta
-		if slide_timer <= 0 or not is_on_floor():
-			is_sliding = false
+var is_dashing: bool = false
+var dash_timer: float = 0.0
+var dash_cooldown_timer: float = 0.0
+var last_dash_direction: float = 0.0
 
-	if not is_sliding:
-		var accel: float
-		var friction: float
-		if is_on_floor():
-			accel = 5000
-			friction = 1000
+func _ready() -> void:
+	horizontal_acceleration_rate = max_horizontal_speed / horizontal_acceleration_time if horizontal_acceleration_time > 0 else 99999.0
+	horizontal_deceleration_rate = max_horizontal_speed / horizontal_deceleration_time if horizontal_deceleration_time > 0 else 99999.0
+
+	if !InputMap.has_action(jump_input_action):
+		push_warning("Jump input action '%s' not found in Project Settings -> Input Map. Please add it!" % jump_input_action)
+	if !InputMap.has_action(dash_input_action):
+		push_warning("Dash input action '%s' not found in Project Settings -> Input Map. Please add it!" % dash_input_action)
+
+func _input(event: InputEvent) -> void:
+	horizontal_input = Input.get_axis("move_left", "move_right")
+
+	if event.is_action_pressed(jump_input_action) and jump_count < max_jumps:
+		velocity.y = 0.0
+		velocity.y = jump_velocity
+		jump_count += 1
+
+	if event.is_action_pressed(dash_input_action) and not is_dashing and dash_cooldown_timer <= 0.0:
+		if abs(horizontal_input) > 0.001 or abs(velocity.x) > horizontal_stop_threshold:
+			is_dashing = true
+			dash_timer = dash_duration
+			dash_cooldown_timer = dash_cooldown
+			last_dash_direction = horizontal_input if abs(horizontal_input) > 0.001 else (1.0 if velocity.x >= 0 else -1.0)
+			# Prevent dash if no direction or if player is completely stopped and no input
+			if abs(last_dash_direction) < 0.001:
+				is_dashing = false # Cancel dash if no direction can be determined
+				dash_cooldown_timer = 0.0 # Don't apply cooldown
 		else:
-			accel = 3000
-			friction = 400
-		if direction != 0:
-			velocity.x = move_toward(velocity.x, direction * speed, accel * delta)
+			is_dashing = false # If no input and not moving, prevent dash
+			dash_cooldown_timer = 0.0
+
+func _physics_process(delta: float) -> void:
+	if is_dashing:
+		dash_timer -= delta
+		if dash_timer <= 0.0:
+			is_dashing = false
+			velocity.x = move_toward(velocity.x, horizontal_input * max_horizontal_speed, horizontal_acceleration_rate * delta * 2)
 		else:
-			velocity.x = move_toward(velocity.x, 0, friction * delta)
+			velocity.x = last_dash_direction * dash_speed
+			move_and_slide()
+			return
 
-	if direction != 0:
-		$Sprite2D.flip_h = direction < 0
-		facing_right = direction > 0
+	if dash_cooldown_timer > 0.0:
+		dash_cooldown_timer -= delta
+		if dash_cooldown_timer < 0.0:
+			dash_cooldown_timer = 0.0
 
-	if not is_on_floor():
-		velocity.y += gravity * delta
-		if velocity.y > max_fall_speed:
-			velocity.y = max_fall_speed
+	if !is_on_floor():
+		velocity.y += gravity_strength * delta
 	else:
-		coyote_timer = coyote_time
-		last_wall_normal = Vector2.ZERO
-		wall_jump_timer = 0.0
+		if velocity.y > 0:
+			velocity.y = 0.0
+		jump_count = 0
 
-	if Input.is_action_just_pressed("jump"):
-		jump_buffer_timer = jump_buffer_time
+	var current_x_velocity: float = velocity.x
+	var target_x_velocity: float = horizontal_input * max_horizontal_speed
 
-	if Input.is_action_just_released("jump") and velocity.y < 0:
-		velocity.y *= 0.5
+	var applied_horizontal_rate: float
+	if abs(horizontal_input) > 0.001:
+		applied_horizontal_rate = horizontal_acceleration_rate
+	else:
+		applied_horizontal_rate = horizontal_deceleration_rate
 
-	if jump_buffer_timer > 0 and coyote_timer > 0:
-		velocity.y = jump_force
-		jump_buffer_timer = 0.0
-		coyote_timer = 0.0
+	var new_x_velocity: float = move_toward(current_x_velocity, target_x_velocity, applied_horizontal_rate * delta)
 
-	if is_on_wall() and not is_on_floor() and Input.is_action_just_pressed("jump"):
-		var wall_normal = get_wall_normal()
-		var trying_same_wall = wall_normal == last_wall_normal and wall_jump_timer > 0.0
+	if abs(new_x_velocity) < horizontal_stop_threshold:
+		new_x_velocity = 0.0
 
-		if not trying_same_wall:
-			velocity = wall_jump_force * Vector2(1 if wall_normal.x > 0 else -1, 1)
-			last_wall_normal = wall_normal
-			wall_jump_timer = wall_jump_cooldown
-			coyote_timer = 0.0
-			jump_buffer_timer = 0.0
-			velocity.x += wall_normal.x * 200
-
-	if wall_jump_timer > 0:
-		wall_jump_timer -= delta
-	if coyote_timer > 0:
-		coyote_timer -= delta
-	if jump_buffer_timer > 0:
-		jump_buffer_timer -= delta
-	if slide_cooldown_timer > 0:
-		slide_cooldown_timer -= delta
+	velocity.x = new_x_velocity
 
 	move_and_slide()

@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://duxxv3hn0kiga"]
+[gd_scene load_steps=9 format=3 uid="uid://duxxv3hn0kiga"]
 
 [ext_resource type="Texture2D" uid="uid://b5wgbvd03crny" path="res://icon.svg" id="1_kelma"]
 [ext_resource type="Script" uid="uid://ckfdi5nopprti" path="res://Scripts/player.gd" id="1_y8w33"]
+[ext_resource type="Script" uid="uid://bc7we61syu042" path="res://Scene/game_manager.gd" id="3_58ae2"]
+[ext_resource type="Texture2D" uid="uid://70apkoayi7x7" path="res://Assets/craftpix-net-622073-business-center-tileset-pixel-art/3 Objects/Money.png" id="4_ivevv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y8w33"]
 size = Vector2(65, 64)
@@ -72,3 +74,20 @@ position_smoothing_enabled = true
 libraries = {
 &"": SubResource("AnimationLibrary_58ae2")
 }
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("3_58ae2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 74.0
+offset_bottom = 23.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(0.462788, -5)
+scale = Vector2(1.73458, 1.41667)
+texture = ExtResource("4_ivevv")
+centered = false
+offset = Vector2(-0.63, 0)
+hframes = 6
