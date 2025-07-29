@@ -1,3 +1,73 @@
-[gd_scene format=3 uid="uid://bvdhb6cxmx1nc"]
+[gd_scene load_steps=7 format=3 uid="uid://bvdhb6cxmx1nc"]
+
+[ext_resource type="PackedScene" uid="uid://bt88g7mnd72ju" path="res://Scene/parallax_background.tscn" id="5_poeaa"]
+[ext_resource type="Texture2D" uid="uid://dq75qge80kdme" path="res://Assets/platform.png" id="6_y4apx"]
+[ext_resource type="Texture2D" uid="uid://chvhs2pbhdym" path="res://Assets/coach.png" id="7_o65i7"]
+[ext_resource type="Texture2D" uid="uid://bc4h0to1lupe2" path="res://Assets/train.png" id="8_8rh1u"]
+[ext_resource type="Texture2D" uid="uid://cupn0sisj5a2o" path="res://Assets/craftpix-net-724171-free-homeless-character-sprite-sheets-pixel-art/Homeless_1/Idle.png" id="9_2eai6"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_poeaa"]
 
 [node name="Level1" type="Node2D"]
+
+[node name="platform" type="Node" parent="."]
+
+[node name="Platform" type="Sprite2D" parent="platform"]
+position = Vector2(129, 518)
+texture = ExtResource("6_y4apx")
+
+[node name="Platform2" type="Sprite2D" parent="platform"]
+position = Vector2(373, 518)
+texture = ExtResource("6_y4apx")
+
+[node name="Platform3" type="Sprite2D" parent="platform"]
+position = Vector2(616, 518)
+texture = ExtResource("6_y4apx")
+
+[node name="Platform6" type="Sprite2D" parent="platform"]
+position = Vector2(629, 694)
+scale = Vector2(4.82813, 14.3571)
+texture = ExtResource("6_y4apx")
+region_enabled = true
+region_rect = Rect2(0, 248.128, 256, 7.87177)
+
+[node name="Platform4" type="Sprite2D" parent="platform"]
+position = Vector2(863, 518)
+texture = ExtResource("6_y4apx")
+
+[node name="Platform5" type="Sprite2D" parent="platform"]
+position = Vector2(1112, 518)
+texture = ExtResource("6_y4apx")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="platform"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platform/StaticBody2D"]
+position = Vector2(561, 631)
+shape = SubResource("WorldBoundaryShape2D_poeaa")
+
+[node name="Coach" type="Sprite2D" parent="."]
+position = Vector2(542, 516)
+texture = ExtResource("7_o65i7")
+region_enabled = true
+region_rect = Rect2(0, 0, 240.269, 256)
+
+[node name="Coach2" type="Sprite2D" parent="."]
+position = Vector2(327, 516)
+texture = ExtResource("7_o65i7")
+region_enabled = true
+region_rect = Rect2(0, 0, 240.269, 256)
+
+[node name="Train" type="Sprite2D" parent="."]
+position = Vector2(785, 514)
+texture = ExtResource("8_8rh1u")
+
+[node name="Idle" type="Sprite2D" parent="."]
+position = Vector2(627, 612)
+scale = Vector2(0.35065, 0.353965)
+texture = ExtResource("9_2eai6")
+region_enabled = true
+region_rect = Rect2(410.307, 30.8718, 77.9487, 98.1691)
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("5_poeaa")]
+offset = Vector2(0, 300)
+transform = Transform2D(1, 0, 0, 1, 0, 300)

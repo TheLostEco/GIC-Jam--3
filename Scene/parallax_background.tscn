@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://bt88g7mnd72ju"]
+
+[ext_resource type="Texture2D" uid="uid://uiljm2u7u3hj" path="res://Assets/craftpix-net-153816-cyberpunk-market-street-pixel-art/2 Background/Night/1.png" id="1_h28if"]
+[ext_resource type="Texture2D" uid="uid://xmh16yje44i" path="res://Assets/craftpix-net-153816-cyberpunk-market-street-pixel-art/2 Background/Night/2.png" id="2_qda4n"]
+[ext_resource type="Texture2D" uid="uid://r73gk7ph5g61" path="res://Assets/craftpix-net-153816-cyberpunk-market-street-pixel-art/2 Background/Night/3.png" id="3_bdxpr"]
+[ext_resource type="Texture2D" uid="uid://cx1grgqs61pkc" path="res://Assets/craftpix-net-153816-cyberpunk-market-street-pixel-art/2 Background/Night/5.png" id="4_y0fc0"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="background" type="ParallaxLayer" parent="."]
+position = Vector2(0, 16)
+motion_scale = Vector2(0, 1)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="1" type="Sprite2D" parent="background"]
+position = Vector2(288, 160)
+texture = ExtResource("1_h28if")
+
+[node name="2" type="Sprite2D" parent="background"]
+position = Vector2(864, 160)
+texture = ExtResource("1_h28if")
+
+[node name="secondbackground" type="ParallaxLayer" parent="."]
+position = Vector2(0, -2)
+motion_scale = Vector2(0.125, 1)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="2" type="Sprite2D" parent="secondbackground"]
+position = Vector2(289, 177)
+texture = ExtResource("2_qda4n")
+
+[node name="3" type="Sprite2D" parent="secondbackground"]
+position = Vector2(864, 177)
+texture = ExtResource("2_qda4n")
+
+[node name="thirdbackground" type="ParallaxLayer" parent="."]
+position = Vector2(2, -2)
+motion_scale = Vector2(0.25, 1)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="3" type="Sprite2D" parent="thirdbackground"]
+position = Vector2(288, 176)
+texture = ExtResource("3_bdxpr")
+
+[node name="4" type="Sprite2D" parent="thirdbackground"]
+position = Vector2(863, 176)
+texture = ExtResource("3_bdxpr")
+
+[node name="fifthbackground" type="ParallaxLayer" parent="."]
+position = Vector2(5, 35)
+motion_scale = Vector2(0.5, 1)
+motion_mirroring = Vector2(1152, 0)
+
+[node name="5" type="Sprite2D" parent="fifthbackground"]
+position = Vector2(283, 139)
+texture = ExtResource("4_y0fc0")
+
+[node name="6" type="Sprite2D" parent="fifthbackground"]
+position = Vector2(857, 139)
+texture = ExtResource("4_y0fc0")
