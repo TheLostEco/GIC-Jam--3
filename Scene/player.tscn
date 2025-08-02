@@ -1,5 +1,9 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 [gd_scene load_steps=6 format=3 uid="uid://duxxv3hn0kiga"]
+=======
+[gd_scene load_steps=64 format=3 uid="uid://duxxv3hn0kiga"]
+>>>>>>> Stashed changes
 =======
 [gd_scene load_steps=64 format=3 uid="uid://duxxv3hn0kiga"]
 >>>>>>> Stashed changes
@@ -458,9 +462,12 @@ animations = [{
 script = ExtResource("1_y8w33")
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.507813, 0.5)
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

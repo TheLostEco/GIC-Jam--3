@@ -1,7 +1,10 @@
 extends CharacterBody2D
 
+<<<<<<< Updated upstream
 # --- Movement Properties ---
 @export var max_horizontal_speed: float = 500.0
+=======
+>>>>>>> Stashed changes
 @export var max_horizontal_speed: float = 200.0
 @export var horizontal_acceleration_time: float = 0.15
 @export var horizontal_deceleration_time: float = 0.2
@@ -53,6 +56,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	horizontal_input = Input.get_axis("move_left", "move_right")
+<<<<<<< Updated upstream
 
 
 	if event.is_action_pressed(jump_input_action):
@@ -66,6 +70,8 @@ func _input(event: InputEvent) -> void:
 			velocity.y = 0.0
 			velocity.y = jump_velocity
 			jump_count += 1
+=======
+>>>>>>> Stashed changes
 	animated_sprite_2d.play("Running")
 		
 	if event.is_action_pressed(jump_input_action) and jump_count < max_jumps:
