@@ -347,23 +347,6 @@ texture = ExtResource("3_s2f1d")
 [sub_resource type="TileSet" id="TileSet_hag5k"]
 sources/0 = SubResource("TileSetAtlasSource_47k5r")
 
-[sub_resource type="Animation" id="Animation_8ucve"]
-resource_name = "train"
-length = 0.33
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("main/Train:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.33),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-312, -356), Vector2(-312, -359.205)]
-}
-
 [sub_resource type="Animation" id="Animation_baltx"]
 length = 0.001
 tracks/0/type = "value"
@@ -391,37 +374,27 @@ tracks/1/keys = {
 "values": [Vector2(576, 55)]
 }
 
+[sub_resource type="Animation" id="Animation_8ucve"]
+resource_name = "train"
+length = 0.33
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("main/Train:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-312, -356), Vector2(-312, -359.205)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n8ygb"]
 _data = {
 &"RESET": SubResource("Animation_baltx"),
 &"train": SubResource("Animation_8ucve")
-}
-
-[sub_resource type="Animation" id="Animation_s2f1d"]
-resource_name = "start"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("main/Camera2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.633333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(576, 55), Vector2(576, 327)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("main/Logo1:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.64, 0.87),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_ejkra"]
@@ -451,10 +424,52 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_s2f1d"]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("main/Camera2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.633333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(576, 55), Vector2(576, 327)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("main/Logo1:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.64, 0.87),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yok32"]
 _data = {
 &"RESET": SubResource("Animation_ejkra"),
 &"start": SubResource("Animation_s2f1d")
+}
+
+[sub_resource type="Animation" id="Animation_klvvj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("main:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_yok32"]
@@ -474,25 +489,25 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(3370, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_klvvj"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_47k5r"]
+_data = {
+&"RESET": SubResource("Animation_klvvj"),
+&"main": SubResource("Animation_yok32")
+}
+
+[sub_resource type="Animation" id="Animation_hag5k"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("main:position")
+tracks/0/path = NodePath("main/Label:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_47k5r"]
-_data = {
-&"RESET": SubResource("Animation_klvvj"),
-&"main": SubResource("Animation_yok32")
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_47k5r"]
@@ -512,40 +527,10 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_hag5k"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("main/Label:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4ckpx"]
 _data = {
 &"RESET": SubResource("Animation_hag5k"),
 &"blink": SubResource("Animation_47k5r")
-}
-
-[sub_resource type="Animation" id="Animation_4ckpx"]
-resource_name = "fade"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_shpw1"]
@@ -561,6 +546,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4ckpx"]
+resource_name = "fade"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_shpw1"]
