@@ -1,7 +1,11 @@
 extends CharacterBody2D
 
+<<<<<<< Updated upstream
 # --- Movement Properties ---
 @export var max_horizontal_speed: float = 500.0
+=======
+@export var max_horizontal_speed: float = 200.0
+>>>>>>> Stashed changes
 @export var horizontal_acceleration_time: float = 0.15
 @export var horizontal_deceleration_time: float = 0.2
 @export var horizontal_stop_threshold: float = 0.5
@@ -17,6 +21,7 @@ extends CharacterBody2D
 @export var dash_duration: float = 0.15
 @export var dash_cooldown: float = 0.5
 @export var dash_input_action: String = "dash"
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 # --- Wall Grab Properties ---
 @export var wall_slide_speed: float = 50.0 # How fast the player slides down the wall
@@ -51,6 +56,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	horizontal_input = Input.get_axis("move_left", "move_right")
+<<<<<<< Updated upstream
 
 	if event.is_action_pressed(jump_input_action):
 		if is_wall_grabbing:
@@ -63,6 +69,14 @@ func _input(event: InputEvent) -> void:
 			velocity.y = 0.0
 			velocity.y = jump_velocity
 			jump_count += 1
+=======
+	animated_sprite_2d.play("Running")
+		
+	if event.is_action_pressed(jump_input_action) and jump_count < max_jumps:
+		velocity.y = 0.0
+		velocity.y = jump_velocity
+		jump_count += 1
+>>>>>>> Stashed changes
 
 	if event.is_action_pressed(dash_input_action) and not is_dashing and dash_cooldown_timer <= 0.0:
 		if abs(horizontal_input) > 0.001 or abs(velocity.x) > horizontal_stop_threshold:
@@ -83,6 +97,7 @@ func _input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	# 1. Handle Dash State
 	if is_dashing:
+		animated_sprite_2d.play("dash")
 		dash_timer -= delta
 		if dash_timer <= 0.0:
 			is_dashing = false
